@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Loan Form{% endblock title %}
+
+{% block body %}
+Loan Form
+<form method='post' style='width:40%; margin: auto'>
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type='submit' class='btn btn-primary'>Apply Loan</button>
+</form>
+{% endblock body %}

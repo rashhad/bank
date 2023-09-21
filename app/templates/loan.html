@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Loan{% endblock title %}
+
+{% block body %}  
+
+<a href="{% url 'applyLoan' %}" class='btn btn-primary'>Loan Form</a>
+
+<table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Apply Date</th>
+        <th scope="col">Desposal Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Desposal</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+        <form method='get' action="{% url 'loanDis' item.id %}">
+            <tr>
+                <td>{{item.dateOfApplication}}</td>
+                <td>{{item.dateOfDisposal}}</td>
+                <td>
+                    {% if item.status == 'Pending'%} 
+                        <select name="loanStatus">
+                            <option value="Approved">Approve</option>
+                            <option value="Denied">Deny</option>
+                        </select>
+                        {% else %}
+                        {{item.status}}
+                        {% endif %}
+                    </td>
+                    <td>{{item.amount}}</td>
+                    <td>
+                        {% if item.status == 'Pending' %}
+                            <input type='submit' formmethod='get' value='Dispose'>
+                        {% elif item.status == 'Approved' %}
+                            <button type='submit' class='btn btn-danger btn-sm'>Pay</button>
+                            {% comment %} <a href="{% url 'loanDis' item.id %}" class='btn btn-danger btn-sm'>Pay</a> {% endcomment %}
+                        {% else %} Disposed{% endif %}
+                    </td>
+                </tr>
+            </form>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock body %}

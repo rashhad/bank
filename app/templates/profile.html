@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Profile Dashboard{% endblock title %}
+
+{% block body %}
+Profile dashboard...
+<form method='post' style='width:40%; margin: auto'>
+    {% csrf_token %}
+    {{formA|crispy}}
+    {{formB|crispy}}
+    <button type='submit' class='btn btn-primary'>Update</button>
+</form>
+{% endblock body %}

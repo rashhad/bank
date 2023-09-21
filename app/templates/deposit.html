@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Deposit{% endblock title %}
+
+{% block body %}
+Deposit page...
+<form method='post' style='width:40%; margin: auto'>
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type='submit' class='btn btn-primary'>Deposit</button>
+</form>
+{% endblock body %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Sign-Up{% endblock title %}
+
+{% block body %}
+<form method='post'>
+    {% csrf_token %}
+    <label for="birthday">Start Date:</label>
+    <input type="date" id="birthday" name="startDate">
+    <label for="birthday">End Date:</label>
+    <input type="date" id="birthday" name="endDate">
+    <button type='submit'>Submit</button>
+</form>
+<table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Transaction Type</th>
+        <th scope="col">Note</th>
+        <th scope="col">Debit</th>
+        <th scope="col">Credit</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+            <tr>
+                <td>{{item.date}}</td>
+                <td>{{item.transactionType}}</td>
+                <td>{{item.detail}}</td>
+                <td>{% if item.debit %}{{item.debit}} {% else %}-{% endif %}</td>
+                <td>{% if item.credit %}{{item.credit}} {% else %}-{% endif %}</td>
+            </tr>
+        {% endfor %}
+        <tfoot>
+            <td colspan="3">Total Balance:</td>
+            <td colspan="2">{{balance}} BDT</td>
+        </tfoot>
+    </tbody>
+  </table>
+{% endblock body %}
