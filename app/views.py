@@ -52,20 +52,20 @@ def withdraw(request):
         form = withdrawForm(request.POST)
         if form.is_valid():
             form.withdraw(request)
-            return redirect('withdraw')
+            return redirect('statement')
     else:
         form=withdrawForm()
-    return redirect('statement')
+    return render(request,'./withdraw.html',{'form':form})
 
 def deposit(request):
     if request.method=='POST':
         form = depositForm(request.POST or None)
         if form.is_valid():
             form.deposit(request)
-            return redirect('deposit')
+            return redirect('statement')
     else:
         form=depositForm()
-    return redirect('statement')
+    return render(request,'./deposit.html',{'form':form})
 
 def Statement(request):
     if request.method=='POST':
